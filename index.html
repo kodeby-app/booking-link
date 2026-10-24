@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Booking Link</title>
+  <meta name="description" content="Make your own booking page in two minutes. Customers pick a free time and send you the request. Free, no sign-up.">
+  <meta property="og:title" content="Booking Link">
+  <meta property="og:description" content="Make your own booking page in two minutes. Customers pick a free time and send you the request. Free, no sign-up.">
+  <meta property="og:image" content="https://book.kodeby.app/screenshot.png">
+  <meta property="og:url" content="https://book.kodeby.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="favicon.svg" alt="" width="28" height="28">
+      <div>
+        <strong data-i18n="appName">Booking Link</strong>
+        <span class="tagline" data-i18n="tagline">Free. No sign-up. Nothing leaves your browser.</span>
+      </div>
+    </div>
+    <nav class="actions">
+      <span class="owner-only">
+        <button type="button" id="btn-reset" data-i18n="reset">Start over</button>
+        <button type="button" id="btn-open" data-i18n="open">Open booking page</button>
+        <button type="button" id="btn-copy" class="primary" data-i18n="copyLink">Copy booking link</button>
+      </span>
+      <select id="lang" aria-label="Language">
+        <option value="en">English</option>
+        <option value="nb">Norsk</option>
+      </select>
+    </nav>
+  </header>
+
+  <main id="setup" class="layout owner-only">
+    <form id="editor" class="editor" autocomplete="off" novalidate>
+      <section class="card">
+        <h2 data-i18n="aboutTitle">1. About you</h2>
+        <div class="grid">
+          <label><span data-i18n="name">Your name</span><input data-bind="name" maxlength="80"></label>
+          <label><span data-i18n="business">Business or title</span><input data-bind="business" maxlength="80"></label>
+          <label><span data-i18n="email">Email that gets the requests</span><input type="email" data-bind="email" maxlength="120"></label>
+          <label><span data-i18n="place">Where you meet</span><input data-bind="place" maxlength="120"></label>
+          <label class="wide"><span data-i18n="intro">A short welcome</span><textarea data-bind="intro" maxlength="400" rows="2"></textarea></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span data-i18n="typesTitle">2. What people can book</span></h2>
+        <div id="types"></div>
+        <button type="button" id="btn-add-type" class="ghost" data-i18n="addType">+ Add a meeting type</button>
+      </section>
+
+      <section class="card">
+        <h2><span data-i18n="hoursTitle">3. When you are available</span></h2>
+        <div id="days" class="days"></div>
+        <div class="grid rules">
+          <label><span data-i18n="tz">Your time zone</span><select data-bind="tz" id="tz"></select></label>
+          <label><span data-i18n="step">Start times every</span>
+            <select data-bind="step">
+              <option value="15">15 min</option><option value="30">30 min</option><option value="60">60 min</option>
+            </select>
+          </label>
+          <label><span data-i18n="notice">Earliest booking (hours ahead)</span><input inputmode="numeric" data-bind="notice" maxlength="4"></label>
+          <label><span data-i18n="ahead">How far ahead (days)</span><input inputmode="numeric" data-bind="ahead" maxlength="3"></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span data-i18n="offTitle">4. Days off</span> <small data-i18n="offHint">Holidays and days you are busy</small></h2>
+        <div class="add-off">
+          <input type="date" id="off-date" aria-label="Date">
+          <button type="button" id="btn-add-off" data-i18n="addOff">Add day off</button>
+        </div>
+        <ul id="off" class="chips"></ul>
+      </section>
+
+      <p class="hint how" data-i18n="how">Copy your booking link and put it on your website, in your email signature or on social media. Customers pick a time and send you the request by email. You confirm it yourself. Your settings are inside the link, so there is no account and no server.</p>
+    </form>
+
+    <aside class="preview-wrap">
+      <p class="preview-label" data-i18n="previewLabel">Preview: this is what your customers see</p>
+      <div id="preview" class="booking card"></div>
+    </aside>
+  </main>
+
+  <main id="public" class="public" hidden>
+    <div id="booking" class="booking card"></div>
+  </main>
+
+  <footer class="site-footer">
+    <span class="owner-only" data-i18n="privacy">Your settings stay in this browser and in the link you share. There is no server, no account and no tracking.</span>
+    <a class="public-only" id="make-own" href="./" data-i18n="makeOwn">Make your own free booking page</a>
+    <span>· <span data-i18n="madeBy">An example app by the Kodeby team.</span> <a href="https://kodeby.app" rel="noopener">kodeby.app</a> · <a href="https://github.com/kodeby-app/booking-link" rel="noopener" data-i18n="source">Source code</a></span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
